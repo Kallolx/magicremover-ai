@@ -26,8 +26,8 @@ const ProcessingState: React.FC<ProcessingStateProps> = ({ image }) => {
   }, []);
 
   return (
-    <div className="flex flex-col items-center justify-center gap-12 w-full">
-      <div className="relative w-full max-w-lg aspect-square rounded-3xl overflow-hidden bg-slate-100 shadow-2xl">
+    <div className="flex flex-col items-center justify-center gap-8 sm:gap-12 w-full px-4">
+      <div className="relative w-full max-w-[280px] sm:max-w-md md:max-w-lg aspect-square rounded-2xl sm:rounded-3xl overflow-hidden bg-slate-100 shadow-2xl">
         {image && (
           <img 
             src={image} 
@@ -50,18 +50,18 @@ const ProcessingState: React.FC<ProcessingStateProps> = ({ image }) => {
 
         {/* AI Overlay pulse */}
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="w-24 h-24 border-4 border-violet-500/20 rounded-full animate-ping" />
+          <div className="w-16 h-16 sm:w-24 sm:h-24 border-4 border-violet-500/20 rounded-full animate-ping" />
         </div>
       </div>
 
-      <div className="text-center space-y-4">
-        <h3 className="text-2xl font-bold text-slate-800 animate-pulse">
+      <div className="text-center space-y-3 sm:space-y-4">
+        <h3 className="text-lg sm:text-2xl font-bold text-slate-800 animate-pulse tracking-tight">
           {wittyTexts[textIndex]}
         </h3>
-        <p className="text-slate-500">Our AI is doing its magic, hang tight!</p>
+        <p className="text-sm sm:text-base text-slate-500 tracking-tight">Our AI is doing its magic, hang tight!</p>
       </div>
 
-      <div className="w-full max-w-md h-2 bg-slate-200 rounded-full overflow-hidden">
+      <div className="w-full max-w-xs sm:max-w-md h-2 bg-slate-200 rounded-full overflow-hidden">
         <motion.div 
           initial={{ width: "0%" }}
           animate={{ width: "100%" }}

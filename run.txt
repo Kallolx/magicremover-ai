@@ -1,0 +1,79 @@
+# ========================================
+# MagicRemover AI - Startup Guide
+# ========================================
+
+## Every Time You Start Your PC:
+
+### Step 1: Start Backend (Terminal 1)
+cd backend
+python -m uvicorn main:app --host 0.0.0.0 --port 8000 --reload
+
+### Step 2: Start Cloudflare Tunnel (Terminal 2)
+cloudflared tunnel --url http://localhost:8000
+
+IMPORTANT: Look for this line in the output:
+|  https://XXXXX-XXXXX-XXXXX-XXXXX.trycloudflare.com  |
+
+Copy that URL! This is your new backend URL.
+
+### Step 3: Update Vercel Environment Variable
+1. Go to: https://vercel.com/kallolx/magicremover-ai/settings/environment-variables
+2. Find: VITE_BACKEND_URL
+3. Update value to: https://XXXXX-XXXXX-XXXXX-XXXXX.trycloudflare.com (your new URL)
+4. Click "Save"
+5. Go to Deployments tab
+6. Click "..." on latest deployment → "Redeploy"
+
+### Step 4: Update Local .env.local (for local dev)
+Open .env.local and change:
+VITE_BACKEND_URL=https://YOUR-NEW-URL.trycloudflare.com
+
+Done! Your app is now live.
+
+---
+
+## Quick Commands:
+
+### Check if backend is running:
+curl http://localhost:8000/health
+
+### Check if tunnel is working:
+curl https://YOUR-TUNNEL-URL.trycloudflare.com/health
+
+### Kill processes if needed:
+Get-NetTCPConnection -LocalPort 8000 | Select-Object OwningProcess | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+Stop-Process -Name cloudflared -Force
+
+---
+
+## Current Session Info:
+Last Tunnel URL: https://nottingham-night-schema-aviation.trycloudflare.com
+(This URL changes every restart!)
+
+---
+
+## Troubleshooting:
+
+### Port 8000 already in use:
+Get-NetTCPConnection -LocalPort 8000 | Select-Object OwningProcess | ForEach-Object { Stop-Process -Id $_.OwningProcess -Force }
+
+### Cloudflared not found:
+$env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User")
+
+### Backend won't start:
+cd backend
+pip install -r requirements.txt
+
+### Slow processing:
+Check GPU is detected: http://localhost:8000/health
+Update GPU drivers if needed.
+
+---
+
+## Alternative: Use Batch Files (Easier)
+
+### Option 1: Use start-backend-public.bat
+Just double-click: start-backend-public.bat
+
+### Option 2: Manual commands (above)
+More control, better for debugging. 
