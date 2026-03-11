@@ -67,7 +67,7 @@ const UploadZone: React.FC<UploadZoneProps> = ({ onUpload }) => {
 
         <div className="flex flex-col w-full gap-3 sm:gap-4 max-w-sm px-4">
           <button 
-            onClick={() => fileInputRef.current?.click()}
+            onClick={(e) => { e.stopPropagation(); fileInputRef.current?.click(); }}
             className="w-full px-6 sm:px-8 py-3 sm:py-4 bg-violet-600 text-white text-sm sm:text-base font-bold tracking-tight rounded-xl sm:rounded-2xl hover:bg-violet-700 active:scale-95 transition-all shadow-lg shadow-violet-200"
           >
             Upload Image

@@ -13,11 +13,8 @@ dist-ssr
 *.local
 
 # Backend (don't deploy Python backend with frontend)
-*/backend/
-backend/__pycache__
-backend/*.pyc
-backend/.env
-backend/models
+/backend
+/bangla-backend
 
 # Editor directories and files
 .vscode/*
