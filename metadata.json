@@ -1,0 +1,7 @@
+{
+  "name": "MagicRemover AI",
+  "description": "A commercial-grade background removal tool with AI-powered background suggestions and professional editing workbench.",
+  "requestFramePermissions": [
+    "camera"
+  ]
+}
