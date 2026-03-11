@@ -39,6 +39,15 @@ const UploadZone: React.FC<UploadZoneProps> = ({ onUpload }) => {
   return (
     <div className="space-y-4 sm:space-y-6">
       <motion.div
+        onClick={() => fileInputRef.current?.click()}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            fileInputRef.current?.click();
+          }
+        }}
+        role="button"
+        tabIndex={0}
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         onDrop={handleDrop}
